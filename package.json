@@ -2,8 +2,9 @@
   "name": "knex-example",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "dependencies": {
+    "express": "^4.16.2",
     "knex": "^0.14.2",
     "pg": "^7.4.0"
   },

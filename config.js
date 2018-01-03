@@ -1,3 +1,5 @@
+'use strict';
+
 const DATABASE = process.env.DATABASE_URL || 'postgres://dev:dev@localhost:5432/dev-restaurants-app';
 
 exports.DATABASE = {
