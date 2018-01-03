@@ -15,6 +15,9 @@ knex
   .debug(true)
   .then(results => console.log(results));
 
+// knex.select('id', 'name', 'borough', 'cuisine')
+//   .from('restaurants')
+//   .then(results => console.log(results));
 
 // Destroy the connection pool
 knex.destroy().then(() => {
