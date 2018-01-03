@@ -6,7 +6,7 @@ const knex = require('knex')(DATABASE);
 // clear the console before each run
 process.stdout.write('\x1Bc');
 
-// Sample select 
+// Sample select
 // knex
 //   .select()
 //   .from('restaurants')
@@ -20,7 +20,7 @@ process.stdout.write('\x1Bc');
 //   .limit(5)
 //   .then(results => console.log(JSON.stringify(results, null, 4)))
 //   .catch( err => console.log( err ) );
- 
+
 // // 1. Get all restaurants
 // knex.select().table('restaurants')
 //   .limit(10)
@@ -33,7 +33,7 @@ process.stdout.write('\x1Bc');
 //   .limit(10)
 //   .then(console.log);
 
-// 3. Get 10 Italian restaurants, subset of fields 
+// 3. Get 10 Italian restaurants, subset of fields
 // knex.select('id', 'name')
 //   .from('restaurants')
 //   .where('cuisine', 'Italian')
@@ -57,8 +57,27 @@ process.stdout.write('\x1Bc');
 //   .where('address_zipcode', '11372')
 //   .then(console.log);
 
+//7. Italian restaurants in one of several zip codes
+// knex.select("id")
+// .from('restaurants')
+// .whereIn("address_zipcode", ['11372', '10013','10014'])
+// .then(console.log);
 
+//8. Create a restaurant
+knex('restaurants').returning('id')
+.insert({
+  name: 'Slaughterhouse Five',
+  borough: 'Brooklyn',
+  cuisine: 'coffee',
+  address_building_number: '123',
+  address_street: 'Atlantic Avenue',
+  address_zipcode: '11231'
+})
+.then(console.log);
 // Destroy the connection pool
+
+knex.select().from('restaurants').where('id','25371').then(console.log);
+
 knex.destroy().then(() => {
   console.log('database connection closed');
 });
