@@ -8,12 +8,13 @@ const knex = require('knex')(DATABASE);
 const app = express();
 
 app.get('/restaurants', (req, res) => {
-  knex.select('id', 'name', 'cuisine', 'borough')
-    .from('restaurants')
-    .limit(10)
-    .then(results => res.json(results));
+    knex.first('restaurants.id', 'name', 'cuisine', 'borough', 'grades.id', 'grade', 'date as inspectionDate', 'score')
+        .select(knex.raw('CONCAT(address_building_number, \' \', address_street, \' \', address_zipcode ) as address'))
+        .from('restaurants')
+        .where('restaurants.id', 1)
+        .innerJoin('grades', 'restaurants.id', 'grades.restaurant_id')    
+        .orderBy('date', 'desc')
+        .then(results => res.json(results));
 });
-
-// ADD ANSWERS HERE
 
 app.listen(PORT);
