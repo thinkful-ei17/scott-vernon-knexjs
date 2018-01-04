@@ -144,5 +144,5 @@ process.stdout.write('\x1Bc');
 
 
 knex.destroy().then(() => {
-  console.log('database connection closed');
+    console.log('database connection closed');
 });
