@@ -1,11 +1,14 @@
 'use strict';
 
 const express = require('express');
+const bodyParser = require('body-parser');
+// ... other stuff
 
 const { DATABASE, PORT } = require('./config');
 const knex = require('knex')(DATABASE);
 
 const app = express();
+const jsonParser = bodyParser.json();
 
 app.get('/restaurants', (req, res) => {
     knex.select('id', 'name', 'cuisine', 'borough')
@@ -25,7 +28,7 @@ app.get('/restaurants/:id', (req, res) => {
         .then(results => res.json(results));
 });
 // ADD ANSWERS HERE
-app.post('/restaurant', (req, res) => {
+app.post('/restaurant', jsonParser, (req, res) => {
     res.status(200);
     res.location('https://google.com');
 });
