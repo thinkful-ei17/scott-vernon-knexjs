@@ -142,15 +142,22 @@ process.stdout.write('\x1Bc');
 // .where('id', '11')
 // .del().then(console.log);
 
-//inner join
-knex.select('restaurants.id', 'name', 'cuisine', 'borough', 'grades.id', 'grade', 'date as inspectionDate', 'score')
+// //inner join
+// knex.select('restaurants.id', 'name', 'cuisine', 'borough', 'grades.id', 'grade', 'date as inspectionDate', 'score')
+//     .from('restaurants')
+//     .where('restaurants.id', 1)
+//     .innerJoin('grades', 'restaurants.id', 'grades.restaurant_id')
+//     .orderBy('date', 'desc')
+//     .limit(3)
+//     .then(results => console.log(results));
+
+//other innerJoin
+knex.select('restaurants.id', 'name', 'cuisine', 'borough', 'grades.id as gradeId', 'grade', 'score')
     .from('restaurants')
-    .where('restaurants.id', 1)
     .innerJoin('grades', 'restaurants.id', 'grades.restaurant_id')
     .orderBy('date', 'desc')
-    .limit(3)
-    .then(results => console.log(results));
-
+    .limit(10)
+    .then(results => console.log(results));  
 
 knex.destroy().then(() => {
     console.log('database connection closed');
