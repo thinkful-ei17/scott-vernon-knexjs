@@ -25,6 +25,11 @@ app.get('/restaurants/:id', (req, res) => {
         .then(results => res.json(results));
 });
 // ADD ANSWERS HERE
+app.post('/restaurant', (req, res) => {
+    res.status(200);
+    res.location('https://google.com');
+});
+
 
 app.listen(PORT, function () {
     console.log('Im listening!');
